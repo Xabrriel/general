@@ -56,7 +56,7 @@ public class Percolation {
    public void open(int i, int j) {
        int row = i;
        int col = j;
-      if (indexComplaint(row, col)) {
+      if (isIndexInRange(row, col)) {
            row = row - 1;
            col = col - 1;
            id[row][col] = open;
@@ -90,7 +90,7 @@ public class Percolation {
     * @throws java.lang.IndexOutOfBoundsException if at least one is not in the range
     */
    public boolean isOpen(int i, int j) {
-       if (indexComplaint(i, j)) {
+       if (isIndexInRange(i, j)) {
            return id[i-1][j-1] != 0;
        } else {
             return false;
@@ -105,7 +105,7 @@ public class Percolation {
     * @throws java.lang.IndexOutOfBoundsException if at least one is not in the range
     */
    public boolean isFull(int i, int j) {
-       if (indexComplaint(i, j)) {
+       if (isIndexInRange(i, j)) {
            //index zero is used as the virtual top site
            return unionFind.connected(0, ufIndex(i-1, j-1));
        } else {
@@ -127,7 +127,7 @@ public class Percolation {
     * @return true if parameter is in the range
     * @throws java.lang.IndexOutOfBoundsException if not in the range
     */
-   private boolean indexComplaint(int i) {
+   private boolean isIndexInRange(int i) {
        if (i >= 1 && i <= N) {
            return true;
        } else {
@@ -142,8 +142,8 @@ public class Percolation {
     * @return true if both integers are in the range 
     * @throws java.lang.IndexOutOfBoundsException if at least one is not in the range
     */
-   private boolean indexComplaint(int i, int j) {
-       return indexComplaint(i) && indexComplaint(j);
+   private boolean isIndexInRange(int i, int j) {
+       return isIndexInRange(i) && isIndexInRange(j);
    }
    
    /**

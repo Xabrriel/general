@@ -84,7 +84,7 @@ public class PercolationStats {
             stddev = 0;
         }
         stddev = Math.sqrt(stddev);
-        
+
         double temp = (1.96*stddev)/Math.sqrt(T);
         confidenceLow = sampleMean - temp;
         confidenceHigh = sampleMean + temp;
@@ -119,9 +119,9 @@ public class PercolationStats {
     public static void main(String[] args) {
         
         PercolationStats ps = new PercolationStats(200, 100);
-        StdOut.printf("%-25s %5s %-10f \n", "mean ", "=", ps.mean());
-        StdOut.printf("%-25s %5s %-10f \n", "stddev ", "=", ps.stddev());
-        StdOut.printf("%-25s %5s %-10f %1s %-10f \n", "95% confidence interval ",
+        StdOut.printf("%-25s %5s %-7f \n", "mean ", "=", ps.mean());
+        StdOut.printf("%-25s %5s %-7f \n", "stddev ", "=", ps.stddev());
+        StdOut.printf("%-25s %5s %-7f %1s %7f \n", "95% confidence interval ",
                 "=", ps.confidenceLo(), ", ", ps.confidenceHi());
     } 
 }
