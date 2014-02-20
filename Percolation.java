@@ -181,7 +181,7 @@ public class Percolation {
                 p.open(row, col);
             }
             p.printArray();
-            StdOut.println("---------------");
+            StdOut.println("--------------");
        }
    }
 }
