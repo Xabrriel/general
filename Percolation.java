@@ -1,7 +1,7 @@
 /**
  * @author Gabriel Grigore
  * @login gabriel.grigore@yahoo.ca
- * @date February 19th, 2014
+ * @date February 20th, 2014
  */
 public class Percolation {
     
@@ -157,31 +157,5 @@ public class Percolation {
        } else {
            return -1;
         }
-   }
-   
-   private void printArray() {
-       for (int i = 0; i < N; i++) {
-           for (int j = 0; j < N; j++) {
-               StdOut.print(id[i][j] + " ");
-           }
-           StdOut.println("");
-       }
-   }   
-   
-   public static void main(String[] args) {
-       int N = 4;
-       Percolation p = new Percolation(N);
-       
-       //while (!p.isFull(N, N)) {
-       while (!p.percolates()) {
-            int row = StdRandom.uniform(N) + 1;
-            int col = StdRandom.uniform(N) + 1;
-            StdOut.println(row + "--" + col);
-            if (!p.isOpen(row, col)) {
-                p.open(row, col);
-            }
-            p.printArray();
-            StdOut.println("--------------.");
-       }
    }
 }

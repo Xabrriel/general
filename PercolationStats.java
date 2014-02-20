@@ -1,15 +1,22 @@
-
+/**
+ * @author Gabriel Grigore
+ * <p>gabriel.grigore@yahoo.ca</p>
+ * <p>February 20th, 2014</p>
+ */
 public class PercolationStats {
-    
+    //size of the grid
     private final int N;
+    //number of observations
     private final int T;
+    //lower bound of the confidence interval
     private double confidenceLow = -1;
+    //upper bound of the confidence interval
     private double confidenceHigh = -1;
     
     /**
      * perform T independent computational experiments on an N-by-N grid
-     * @param N
-     * @param T 
+     * @param N size of the grid
+     * @param T number of observations
      */
     public PercolationStats(int N, int T) {
         if (N <= 0 || T <= 0) {
@@ -44,8 +51,7 @@ public class PercolationStats {
     }
     
     /**
-     * sample standard deviation of percolation threshold
-     * @return 
+     * @return standard deviation of percolation threshold
      */
     public double stddev() {
         double sampleMean = 0;
@@ -87,8 +93,7 @@ public class PercolationStats {
     }
     
     /**
-     * returns lower bound of the 95% confidence interval
-     * @return 
+     * @return lower bound of the 95% confidence interval
      */
     public double confidenceLo() {
         if (confidenceLow < 0) {
@@ -98,8 +103,7 @@ public class PercolationStats {
     } 
     
     /**
-     * returns upper bound of the 95% confidence interval
-     * @return 
+     * @return upper bound of the 95% confidence interval
      */
     public double confidenceHi() {
         if (confidenceHigh < 0) {
@@ -112,11 +116,12 @@ public class PercolationStats {
      * test client, main class
      * @param args 
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        
         PercolationStats ps = new PercolationStats(200, 100);
-            StdOut.println("mean = " + ps.mean());
-            StdOut.println("stddev = " + ps.stddev());
-            StdOut.println("conLo = " + ps.confidenceLo());
-            StdOut.println("conHi = " + ps.confidenceHi());
+        StdOut.printf("%-25s %5s %-10f \n", "mean ", "=", ps.mean());
+        StdOut.printf("%-25s %5s %-10f \n", "stddev ", "=", ps.stddev());
+        StdOut.printf("%-25s %5s %-10f %1s %-10f \n", "95% confidence interval ",
+                "=", ps.confidenceLo(), ", ", ps.confidenceHi());
     } 
 }
