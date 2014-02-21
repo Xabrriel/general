@@ -117,11 +117,21 @@ public class PercolationStats {
      * @param args 
      */
     public static void main(String[] args) {
-        
-        PercolationStats ps = new PercolationStats(200, 100);
-        StdOut.printf("%-25s %5s %-7f \n", "mean ", "=", ps.mean());
-        StdOut.printf("%-25s %5s %-7f \n", "stddev ", "=", ps.stddev());
-        StdOut.printf("%-25s %5s %-7f %1s %7f \n", "95% confidence interval ",
-                "=", ps.confidenceLo(), ", ", ps.confidenceHi());
+        if (args.length != 2) {
+            System.err.println("Wrong number of arguments. Expected two.");
+        } else {
+            int N, T;
+            try {
+                N = Integer.parseInt(args[0]);
+                T = Integer.parseInt(args[1]);
+                PercolationStats ps = new PercolationStats(N, T);
+                StdOut.printf("%-25s %5s %-7f\n", "mean ", "=", ps.mean());
+                StdOut.printf("%-25s %5s %-7f\n", "stddev ", "=", ps.stddev());
+                StdOut.printf("%-25s %5s %-7f %1s %7f\n", "95% confidence interval ",
+                        "=", ps.confidenceLo(), ", ", ps.confidenceHi());            
+            } catch (NumberFormatException e) {
+                System.err.println("Arguments should be integers. Check and retry.");
+            }
+        }
     } 
 }
