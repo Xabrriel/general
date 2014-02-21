@@ -113,7 +113,12 @@ public class Percolation {
    public boolean isFull(int i, int j) {
        if (isIndexInRange(i, j)) {
            //index zero is used as the virtual top site
-           return unionFind.connected(0, ufIndex(i-1, j-1));
+           if (isOpen(1, 1) && isOpen(i, j)) {
+               return unionFind.connected(0, ufIndex(i-1, j-1));
+           }
+           else {
+               return false;
+           }
        } else {
            return false;           
        }

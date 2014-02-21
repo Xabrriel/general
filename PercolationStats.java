@@ -7,7 +7,7 @@
  * February 21th, 2014
  * </p>
  * Class helps to gather statistics for a percolation system. Uses the 
- * Percolation class to achieve goals. 
+ * Percolation class, algs4.jar and stdlib.jar to achieve goals. 
  * Usage: "java PercolationStats 20 20"
  */
 public class PercolationStats {
