@@ -1,7 +1,13 @@
 /**
  * @author Gabriel Grigore
- * @login gabriel.grigore@yahoo.ca
- * @date February 20th, 2014
+ * <p>
+ * gabriel.grigore@yahoo.ca
+ * </p>
+ * <p>
+ * February 21th, 2014
+ * </p>
+ * Class model a percolation system. Uses the weighted union find algorithm.
+ * There is no main method here, create one in order to use this class.
  */
 public class Percolation {
     

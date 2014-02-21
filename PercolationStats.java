@@ -1,7 +1,14 @@
 /**
  * @author Gabriel Grigore
- * <p>gabriel.grigore@yahoo.ca</p>
- * <p>February 20th, 2014</p>
+ * <p>
+ * gabriel.grigore@yahoo.ca
+ * </p>
+ * <p>
+ * February 21th, 2014
+ * </p>
+ * Class helps to gather statistics for a percolation system. Uses the 
+ * Percolation class to achieve goals. 
+ * Usage: "java PercolationStats 20 20"
  */
 public class PercolationStats {
     //size of the grid
