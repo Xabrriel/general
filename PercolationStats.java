@@ -27,7 +27,7 @@ public class PercolationStats {
      */
     public PercolationStats(int N, int T) {
         if (N <= 0 || T <= 0) {
-            throw new IndexOutOfBoundsException("Positive integers expected.");
+            throw new IllegalArgumentException("Positive integers expected.");
         }
         this.N = N;
         this.T = T;

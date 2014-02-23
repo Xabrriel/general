@@ -19,6 +19,9 @@ public class Percolation {
     private final int open;
     //the array that emulate the grid
     private int[][] id;
+    //
+    private int[] starters;
+    private int startersIdx;
     //weighted union find algorithm implementation
     private WeightedQuickUnionUF unionFind;
     
@@ -40,17 +43,19 @@ public class Percolation {
                id[i][j] = blocked;
            }
        }
+       starters = new int[N];
+       startersIdx = 0;
        unionFind = new WeightedQuickUnionUF(N * N);
        //prepare the virtual top site
        for (int i = 1; i < N; i++) {
            unionFind.union(0, i);
        }
        //prepare the virtual bottom site
-       int lastRowFirstElem = N * (N - 1);
-       int lastRowLastElem = N * N - 1;
-       for (int i = 0; i < N - 1; i++) {
-           unionFind.union(lastRowFirstElem + i, lastRowLastElem);
-       }
+//       int lastRowFirstElem = N * (N - 1);
+//       int lastRowLastElem = N * N - 1;
+//       for (int i = 0; i < N - 1; i++) {
+//           unionFind.union(lastRowFirstElem + i, lastRowLastElem);
+//       }
    }
    
    /**
@@ -65,7 +70,11 @@ public class Percolation {
       if (isIndexInRange(row, col)) {
            row = row - 1;
            col = col - 1;
-           id[row][col] = open;
+           if (id[row][col] == blocked) {
+                id[row][col] = open;
+           } else {
+               return;
+           }
       }
       //conect to all adjacent open sites  
       int currentIdx =  ufIndex(row, col);
@@ -85,7 +94,10 @@ public class Percolation {
       int leftIdx = ufIndex(row, col - 1);
       if (leftIdx >= 0 && id[row][col - 1] == open) {
           unionFind.union(currentIdx, leftIdx);
-      }      
+      }
+      if (N == i) {
+          starters[startersIdx++] = j;
+      }
    }
    
    /**
@@ -113,8 +125,12 @@ public class Percolation {
    public boolean isFull(int i, int j) {
        if (isIndexInRange(i, j)) {
            //index zero is used as the virtual top site
-           if (isOpen(1, 1) && isOpen(i, j)) {
-               return unionFind.connected(0, ufIndex(i-1, j-1));
+           int wufIdx = ufIndex(i-1, j-1);
+           if (isOpen(i, j)) {
+                if (wufIdx < N) {
+                    return true;
+                }
+                return unionFind.connected(0, wufIdx);
            }
            else {
                return false;
@@ -129,7 +145,18 @@ public class Percolation {
     * @return true if it does
     */
    public boolean percolates()  {
-       return unionFind.connected(0, ufIndex(N-1, N-1));
+       if (N == 1) {
+           return isOpen(N, N);
+       } else {
+           //this can be improved by iterating only the bottom open sites
+           //store them in a separate array?
+           for (int j = 0; j < startersIdx; j++) {
+                if (true == unionFind.connected(0, ufIndex(N-1, starters[j]-1))) {
+                    return true;
+                }
+           }
+           return false;
+       }
     }
    
    /**
@@ -169,4 +196,5 @@ public class Percolation {
            return -1;
         }
    }
+   
 }
